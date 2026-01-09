@@ -1,6 +1,6 @@
 "use client";
 
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 interface CurrentForecast {
@@ -8,7 +8,15 @@ interface CurrentForecast {
   temp: number;
   wind: number;
   humidity: number;
+  rain: number;
 } // defining object shape TS style, Pascal case
+interface CurrentForecastData {
+  time: string[];
+  temperature_2m: number[];
+  wind_speed_10m: number[];
+  relative_humidity_2m: number[];
+  rain: number[];
+}
 interface HourlyForecast {
   time: string;
   temp: number;
@@ -38,14 +46,13 @@ interface DailyData {
   precipitation_probability_mean: number[];
 }
 interface ForecastResponse {
-  current_weather: CurrentForecast;
+  current_weather: CurrentForecastData;
   hourly: HourlyData;
   daily: DailyData;
 }
 
 const Weather = () => {
-  const [currentForecast, setCurrentForecast] =
-    useState<CurrentForecast | null>(null);
+  const [currentForecast, setCurrentForecast] = useState<CurrentForecast[]>([]);
   const [hourlyForecast, setHourlyForecast] = useState<HourlyForecast[]>([]);
   const [dailyForecast, setDailyForecast] = useState<DailyForecast[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -68,7 +75,7 @@ const Weather = () => {
       );
       const fetchedData = weatherResponse.data;
       console.log(fetchedData);
-      setCurrentForecast(fetchedData.current_weather); //current weather
+      setCurrentForecast([fetchedData.current_weather]); //current weather
 
       const hourly: HourlyForecast[] = fetchedData.hourly.time.map(
         (time: string, i: number) => ({
@@ -80,6 +87,16 @@ const Weather = () => {
         })
       );
       setHourlyForecast(hourly);
+
+      const now = new Date();
+      const currentWeather = hourly.reduce((prev, curr) => {
+        const currDate = new Date(curr.time);
+        return Math.abs(currDate.getTime() - now.getTime()) <
+          Math.abs(new Date(prev.time).getTime() - now.getTime())
+          ? curr
+          : prev;
+      });
+      setCurrentForecast([currentWeather]); // So that current weather now actually displays values
 
       const daily: DailyForecast[] = fetchedData.daily.time.map(
         (date: string, i: number) => ({
@@ -107,8 +124,6 @@ const Weather = () => {
   };
 
   return (
-    // ...existing code...
-
     <div style={{ padding: 16 }}>
       <div style={{ marginBottom: 12 }}>
         <input
@@ -126,13 +141,13 @@ const Weather = () => {
 
       {loading && <p>Loading...</p>}
 
-      {currentForecast && (
+      {currentForecast.length > 0 && (
         <div style={{ marginBottom: 12 }}>
           <h2>Current</h2>
-          <p>Time: {currentForecast.time}</p>
-          <p>Temp: {currentForecast.temp}°C</p>
-          <p>Wind: {currentForecast.wind} km/h</p>
-          <p>Humidity: {currentForecast.humidity}%</p>
+          <p>Time: {currentForecast[0].time}</p>
+          <p>Temp: {currentForecast[0].temp}°C</p>
+          <p>Wind: {currentForecast[0].wind} km/h</p>
+          <p>Humidity: {currentForecast[0].humidity}%</p>
         </div>
       )}
 

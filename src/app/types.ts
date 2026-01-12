@@ -1,12 +1,4 @@
-export interface CurrentForecast {
-  time: string;
-  temp: number;
-  wind: number;
-  humidity: number;
-  rain: number;
-} // defining object shape TS style, Pascal case
-
-export interface HourlyForecast {
+export interface Forecast {
   time: string;
   temp: number;
   wind: number;

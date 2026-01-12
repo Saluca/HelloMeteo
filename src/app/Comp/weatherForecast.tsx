@@ -52,6 +52,7 @@ interface ForecastResponse {
 }
 
 const Weather = () => {
+  const [searchTime, setSearchTime] = useState<string>("");
   const [currentForecast, setCurrentForecast] = useState<CurrentForecast[]>([]);
   const [hourlyForecast, setHourlyForecast] = useState<HourlyForecast[]>([]);
   const [dailyForecast, setDailyForecast] = useState<DailyForecast[]>([]);
@@ -89,14 +90,22 @@ const Weather = () => {
       setHourlyForecast(hourly);
 
       const now = new Date();
-      const currentWeather = hourly.reduce((prev, curr) => {
-        const currDate = new Date(curr.time);
-        return Math.abs(currDate.getTime() - now.getTime()) <
-          Math.abs(new Date(prev.time).getTime() - now.getTime())
-          ? curr
-          : prev;
-      });
+      const currentHour = now.getHours();
+      const next12Hours = hourly // want to see forecast from current hour onwards
+        .filter((f) => new Date(f.time).getHours() >= currentHour)
+        .slice(0, 12);
+
+      setSearchTime(now.toISOString());
+      const currentWeather = next12Hours[0];
+      //hourly.reduce((prev, curr) => {
+      //   const currDate = new Date(curr.time);
+      //   return Math.abs(currDate.getTime() - now.getTime()) <
+      //     Math.abs(new Date(prev.time).getTime() - now.getTime())
+      //     ? curr
+      //     : prev;
+      // });
       setCurrentForecast([currentWeather]); // So that current weather now actually displays values
+      setHourlyForecast(next12Hours);
 
       const daily: DailyForecast[] = fetchedData.daily.time.map(
         (date: string, i: number) => ({
@@ -148,6 +157,7 @@ const Weather = () => {
           <p>Temp: {currentForecast[0].temp}°C</p>
           <p>Wind: {currentForecast[0].wind} km/h</p>
           <p>Humidity: {currentForecast[0].humidity}%</p>
+          <p>Rain: {currentForecast[0].rain}mm</p>
         </div>
       )}
 

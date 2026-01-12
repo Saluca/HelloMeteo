@@ -1,0 +1,4 @@
+- Fix timezone bug
+- Move API calls into custom react hook
+- Add mapping logic for API response (daily forecast data)
+- Abstract UI into smaller components

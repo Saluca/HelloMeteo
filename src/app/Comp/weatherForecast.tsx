@@ -2,12 +2,12 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { CurrentForecast, DailyForecast, HourlyForecast } from "../types";
+import { DailyForecast, Forecast } from "../types";
 
 const Weather = () => {
   const [searchTime, setSearchTime] = useState<string>("");
-  const [currentForecast, setCurrentForecast] = useState<CurrentForecast[]>([]);
-  const [hourlyForecast, setHourlyForecast] = useState<HourlyForecast[]>([]);
+  const [currentForecast, setCurrentForecast] = useState<Forecast[]>([]);
+  const [hourlyForecast, setHourlyForecast] = useState<Forecast[]>([]);
   const [dailyForecast, setDailyForecast] = useState<DailyForecast[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [searchLocation, setSearchLocation] = useState<string>("London");
@@ -31,7 +31,7 @@ const Weather = () => {
       console.log(fetchedData);
       setCurrentForecast([fetchedData.current_weather]); //current weather
 
-      const hourly: HourlyForecast[] = fetchedData.hourly.time.map(
+      const hourly: Forecast[] = fetchedData.hourly.time.map(
         (time: string, i: number) => ({
           time: time,
           temp: fetchedData.hourly.temperature_2m[i],

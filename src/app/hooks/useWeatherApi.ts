@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Forecast, DailyForecast } from "../types";
+import { DateTime } from "luxon";
 
 export const useWeatherApi = ({ location }: { location: string }) => {
   const [currentForecast, setCurrentForecast] = useState<Forecast[]>([]);
@@ -15,7 +16,7 @@ export const useWeatherApi = ({ location }: { location: string }) => {
     const fetchWeatherForecast = async () => {
       try {
         const geolocationResponse = await axios.get(
-          `https://geocoding-api.open-meteo.com/v1/search?name=${location}&count=1&language=en&format=json`
+          `https://geocoding-api.open-meteo.com/v1/search?name=${location}&count=1&language=en&format=json`,
         );
         if (!geolocationResponse.data.results?.length) {
           setError("Location not found");
@@ -26,9 +27,10 @@ export const useWeatherApi = ({ location }: { location: string }) => {
         const { latitude: lat, longitude: lon } =
           geolocationResponse.data.results[0]; // get lat and lon from first returned obj
         const weatherResponse = await axios.get(
-          `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=temperature_2m,wind_speed_10m,relative_humidity_2m,rain&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_mean&timezone=auto`
+          `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=temperature_2m,wind_speed_10m,relative_humidity_2m,rain&daily=temperature_2m_max,temperature_2m_min,weathercode,precipitation_probability_mean&timezone=auto`,
         );
         const fetchedData = weatherResponse.data;
+        const apiTimeZone = weatherResponse.data.timezone;
         console.log(fetchedData);
         setCurrentForecast([fetchedData.current_weather]); //current weather
 
@@ -39,26 +41,20 @@ export const useWeatherApi = ({ location }: { location: string }) => {
             wind: fetchedData.hourly.wind_speed_10m[i],
             humidity: fetchedData.hourly.relative_humidity_2m[i],
             rain: fetchedData.hourly.rain[i],
-          })
+          }),
         );
         setHourlyForecast(hourlyForecast);
 
-        const currentHour = new Date().getHours();
-        const next12Hours = hourlyForecast // want to see forecast from current hour onwards
+        const now = DateTime.now().setZone(apiTimeZone);
+        const next12Hours = hourlyForecast
           .filter(
-            (forecast) => new Date(forecast.time).getHours() >= currentHour
+            (forecast) =>
+              DateTime.fromISO(forecast.time, { zone: apiTimeZone }) >= now,
           )
-          .slice(0, 13);
+          .slice(0, 12); // Current time rounds up because of API e.g. the time response object is 1:00,2:00 etc no minutes
 
-        // setSearchTime(now.toISOString());
         const currentWeather = next12Hours[0];
-        //hourly.reduce((prev, curr) => {
-        //   const currDate = new Date(curr.time);
-        //   return Math.abs(currDate.getTime() - now.getTime()) <
-        //     Math.abs(new Date(prev.time).getTime() - now.getTime())
-        //     ? curr
-        //     : prev;
-        // });
+
         setCurrentForecast([currentWeather]); // So that current weather now actually displays values
         setHourlyForecast(next12Hours);
 
@@ -70,7 +66,7 @@ export const useWeatherApi = ({ location }: { location: string }) => {
             weathercode: fetchedData.daily.weathercode[i],
             precipitationProb:
               fetchedData.daily.precipitation_probability_mean[i],
-          })
+          }),
         );
         setDailyForecast(daily);
       } catch (err) {

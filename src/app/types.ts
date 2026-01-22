@@ -1,4 +1,5 @@
 export interface Forecast {
+  label: string | number | null | undefined;
   time: string;
   temp: number;
   wind: number;

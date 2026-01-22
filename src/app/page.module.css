@@ -18,10 +18,10 @@
 }
 
 .main {
-  display: flex;
+  display: grid;
   min-height: 100vh;
   width: 100%;
-  max-width: 800px;
+  max-width: 1200px;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;

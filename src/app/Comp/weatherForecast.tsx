@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import { useWeatherApi } from "../hooks/useWeatherApi";
+import "./search.css";
+import "./weatherDisplay.css";
 
 const Weather = () => {
   const [searchLocation, setSearchLocation] = useState("London");
@@ -25,27 +27,24 @@ const Weather = () => {
   }
 
   return (
-    <div style={{ padding: 16 }}>
-      <div style={{ marginBottom: 12 }}>
-        <input
-          type="text"
-          value={searchLocation}
-          onChange={(e) => setSearchLocation(e.target.value)}
-          placeholder="Enter a City"
-        />
-        <button onClick={handleSearch} style={{ marginLeft: 8 }}>
-          Search City
-        </button>
-      </div>
-
+    <div className="page">
+      <div className="search-container" />
+      <input
+        className="input"
+        type="text"
+        value={searchLocation}
+        onChange={(e) => setSearchLocation(e.target.value)}
+        placeholder="Enter a City"
+      />
+      <button onClick={handleSearch} className="search-button">
+        Search City
+      </button>
       <h1>Forecast for {location}</h1>
-
-      {loading && <p>Loading...</p>}
 
       {currentForecast.length > 0 && (
         <div style={{ marginBottom: 12 }}>
           <h2>Current</h2>
-          <p>Time: {currentForecast[0].time}</p>
+          {/* <p>Time: {currentForecast[0].time}</p> */}
           <p>Temp: {currentForecast[0].temp}°C</p>
           <p>Wind: {currentForecast[0].wind} km/h</p>
           <p>Humidity: {currentForecast[0].humidity}%</p>
@@ -54,16 +53,19 @@ const Weather = () => {
       )}
 
       {hourlyForecast.length > 0 && (
-        <div style={{ marginBottom: 12 }}>
+        <div className="hourly">
           <h2>Hourly</h2>
-          <ul>
-            {hourlyForecast.slice(0, 12).map((f, idx) => (
-              <li key={idx}>
-                {f.time} — Temp: {f.temp}°C, Wind: {f.wind} km/h, Humidity:{" "}
-                {f.humidity}%, Rain: {f.rain}mm
-              </li>
-            ))}
-          </ul>
+          {hourlyForecast.slice(0, 12).map((f, idx) => (
+            <div key={f.label} className="hourlyItem">
+              <time dateTime={f.time} className="hour">
+                {f.label}
+              </time>
+              <span className="stat">🌡 {f.temp}°C</span>
+              <span className="stat">🌬 {f.wind} km/h</span>
+              <span className="stat">💧 {f.humidity}%</span>
+              <span className="stat">🌧 {f.rain} mm</span>
+            </div>
+          ))}
         </div>
       )}
 

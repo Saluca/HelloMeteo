@@ -51,7 +51,13 @@ export const useWeatherApi = ({ location }: { location: string }) => {
             (forecast) =>
               DateTime.fromISO(forecast.time, { zone: apiTimeZone }) >= now,
           )
-          .slice(0, 12); // Current time rounds up because of API e.g. the time response object is 1:00,2:00 etc no minutes
+          .slice(0, 12)
+          .map((forecast) => ({
+            ...forecast,
+            label: DateTime.fromISO(forecast.time, {
+              zone: apiTimeZone,
+            }).toFormat("ccc dd • HH:mm"),
+          }));
 
         const currentWeather = next12Hours[0];
 

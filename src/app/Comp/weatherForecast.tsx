@@ -70,7 +70,7 @@ const Weather = () => {
       )}
 
       {dailyForecast.length > 0 && (
-        <div>
+        <div className="dailyForecast">
           <h2>Daily</h2>
           <ul>
             {dailyForecast.map((d, idx) => (

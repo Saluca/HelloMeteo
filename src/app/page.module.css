@@ -1,6 +1,7 @@
-.page {
+/* .page {
   --background: #fafafa;
   --foreground: #fff;
+  
 
   --text-primary: #000;
   --text-secondary: #666;
@@ -15,7 +16,7 @@
   justify-content: center;
   font-family: var(--font-geist-sans);
   background-color: var(--background);
-}
+} */
 
 .main {
   display: grid;

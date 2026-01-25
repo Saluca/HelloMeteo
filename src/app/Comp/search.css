@@ -1,5 +1,10 @@
 .page {
   padding: 20px;
+  background-image: url("/sky-5534319_1920.jpg");
+  background-size: cover;
+  background-position: center;
+  height: "100vh";
+  overflow: hidden;
 }
 .search-container {
   display: flex;

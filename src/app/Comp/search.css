@@ -1,15 +1,8 @@
-.page {
-  padding: 20px;
-  background-image: url("/sky-5534319_1920.jpg");
-  background-size: cover;
-  background-position: center;
-  height: "100vh";
-  overflow: hidden;
-}
 .search-container {
   display: flex;
   align-items: stretch;
   gap: 0.5rem;
+  justify-content: center;
 }
 .input {
   width: 25%;
@@ -58,15 +51,15 @@
 }
 
 .search-button:hover {
-  border-color: #06f;
+  border-color: azure;
   color: rgb(11, 11, 11);
   fill: #06f;
 }
 
 .search-button:active {
-  border-color: #06f;
-  color: #06f;
-  fill: #06f;
+  border-color: azure;
+  color: azure;
+  fill: azure;
 }
 
 @media (min-width: 768px) {

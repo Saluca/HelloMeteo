@@ -1,0 +1,7 @@
+.page {
+  /* background-image: url("/sky-5534319_1920.jpg"); */
+  min-height: 100vh;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: #0a273f;
+}

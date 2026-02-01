@@ -67,6 +67,9 @@ export const useWeatherApi = ({ location }: { location: string }) => {
         const daily: DailyForecast[] = fetchedData.daily.time.map(
           (date: string, i: number) => ({
             date,
+            label: DateTime.fromISO(date, { zone: apiTimeZone }).toFormat(
+              "ccc • dd",
+            ),
             tempMax: fetchedData.daily.temperature_2m_max[i],
             tempMin: fetchedData.daily.temperature_2m_min[i],
             weathercode: fetchedData.daily.weathercode[i],

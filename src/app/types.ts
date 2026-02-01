@@ -8,6 +8,7 @@ export interface Forecast {
 }
 
 export interface DailyForecast {
+  label: string | number | null | undefined;
   date: string;
   tempMax: number;
   tempMin: number;

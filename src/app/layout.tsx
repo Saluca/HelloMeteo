@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Montserrat, Poppins } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,6 +39,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable}  ${montserrat.variable} ${poppins.variable} bg-gray-900 text-white min-h-screen`}
       >
         {children}
+        {/* Vercel Analytics snippet */}
+        <Analytics />
       </body>
     </html>
   );

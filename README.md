@@ -1,18 +1,24 @@
 # Hello Meteo
 
-🚧 **Work in progress**
-This project is under active development. Features,APIs and structure may change.
+A simple web application that displays current weather conditions, a 12‑hour forecast, and a 7‑day forecast for a selected location.
 
-## About
+## Features
 
-Hello Meteo is an application that allows users to searach for a city and view the weather forecast
+🌤️ Current weather (temperature, wind, humidity, rain amount,)
 
-## Current Features
+🕒 12‑hour hourly forecast (temperature,wind, humidity,rain amount)
 
-- Search weather by city name
-- Display current weather conditions
-- View forecast for the next 12 hours
-- View forecast for the next week
+📅 7‑day daily forecast(Max temp, Min temp, rain probability)
+
+## Tech Stack
+
+Frontend: React + Next.js + TypeScript
+
+Styling: CSS
+
+Icons: Tabler Icons
+
+APIs: Open‑Meteo API, Geocoding API
 
 Run the development server using your preferred package manager:
 
@@ -25,3 +31,5 @@ pnpm dev
 # or
 bun dev
 ```
+
+Built with ❤️ as a learning project.

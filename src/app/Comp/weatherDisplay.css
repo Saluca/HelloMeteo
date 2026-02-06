@@ -32,7 +32,7 @@
   font-weight: 600;
   gap: 1rem;
   justify-content: space-around;
-  background:  rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   padding: 1rem 1rem;
   color: azure;
@@ -96,6 +96,9 @@
   color: azure;
 }
 .dailyWrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 700px;
   margin-right: 700px;
   margin-left: 20px;
   margin-top: -220px;

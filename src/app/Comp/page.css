@@ -1,7 +1,35 @@
-.page {
-  /* background-image: url("/sky-5534319_1920.jpg"); */
+/* .page {
+ 
   min-height: 100vh;
   box-sizing: border-box;
   overflow: hidden;
-  background-color: #0a273f;
+  background-color: #093e69;
+} */
+.page {
+  min-height: 100vh;
+  padding-top: 20px;
+  background: linear-gradient(
+    178deg,
+    #3b4c68 0%,
+    #4e5f7b 15%,
+    #627796 30%,
+    #7f93ae 45%,
+    #b5b2b0 60%,
+    #d6c7be 75%,
+    #f0cbb2 90%,
+    #9a8b6c 100%
+  );
+  background-size: 100% 200%;
+  animation: gradientMove 35s linear infinite;
+}
+@keyframes gradientMove {
+  0% {
+    background-position: 50% 0%;
+  }
+  50% {
+    background-position: 50% 100%;
+  }
+  100% {
+    background-position: 50% 0%;
+  }
 }

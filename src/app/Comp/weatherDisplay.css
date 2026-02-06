@@ -1,12 +1,13 @@
 .currentCard {
-  max-width: 500px;
+  max-width: 700px;
   margin: 2rem 0 2rem 2rem;
-  background: rgba(87, 174, 227, 0.1);
+  background: rgba(25, 40, 50, 0.1);
   border-radius: 12px;
   padding: 1.5rem;
   text-align: center;
 }
 .current h1 {
+  font-family: var(--font-poppins);
   margin: 0;
   font-size: 1.25rem;
   color: azure;
@@ -19,25 +20,32 @@
 }
 .currentTemp {
   font-size: 1.5rem;
-  font-weight: bold;
-  display: block;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
   margin-top: 0.5rem;
   color: azure;
 }
 .currentDetails {
   margin-top: 1.5rem;
   display: flex;
+  font-weight: 600;
+  gap: 1rem;
   justify-content: space-around;
-  background: rgba(255, 255, 255, 0.1);
+  background:  rgba(255, 255, 255, 0.1);
   border-radius: 8px;
-  padding: 0.75rem 1rem;
-  font-size: 0.9rem;
+  padding: 1rem 1rem;
   color: azure;
 }
+.currentDetails svg {
+  vertical-align: middle;
+  transform: translateY(-2px);
+}
 .hourlyWrapper {
-  margin-top: -250px;
+  margin-top: -280px;
 }
 .hourlyTitle {
+  font-family: var(--font-poppins), sans-serif;
   display: block;
   margin-left: 900px;
   margin-top: 10px;
@@ -45,11 +53,11 @@
 }
 
 .hourlyCard {
-  background: rgba(87, 174, 227, 0.1);
+  background: rgba(25, 40, 50, 0.1);
   margin-left: 900px;
   margin-right: 30px;
   border-radius: 12px;
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 .hourlyItem {
@@ -65,6 +73,7 @@
 }
 
 .hour {
+  font-family: var(--font-poppins);
   font-weight: 600;
   margin-left: -20px;
   min-width: 50px;
@@ -83,24 +92,27 @@
   border-radius: 8px;
   padding: 0.25rem 0.25rem;
   font-size: 0.8rem;
+  font-weight: 600;
   color: azure;
 }
 .dailyWrapper {
   margin-right: 700px;
   margin-left: 20px;
-  margin-top: -180px;
+  margin-top: -220px;
 }
 .dailyTitle {
+  font-family: var(--font-poppins), sans-serif;
   position: relative;
   display: block;
   color: white;
 }
 .dailyCard {
-  background: rgba(87, 174, 227, 0.1);
+  background: rgba(25, 40, 50, 0.1);
   border-radius: 12px;
   padding: 1rem;
   display: flex;
   color: azure;
+  gap: 0.5rem;
 }
 .dailyItem {
   display: flex;
@@ -127,5 +139,5 @@
   opacity: 0.85;
   font-weight: 600;
   padding: 0 0.75rem;
-  gap: 0.5rem;
+  gap: 0.25rem;
 }

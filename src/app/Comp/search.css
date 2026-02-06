@@ -1,69 +1,52 @@
+/* .search-container {
+  display: flex;
+  align-items: center;
+  background: rgba(3, 12, 18, 0.1);
+  padding: 5px 10px;
+  border-radius: 10px;
+  border-style: inset;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  width: 320px;
+} */
 .search-container {
   display: flex;
-  align-items: stretch;
-  gap: 0.5rem;
-  justify-content: center;
-}
-.input {
-  width: 25%;
-  height: 40px;
-  padding: 0 0.75rem;
-  transition: 0.2s linear;
-  border: 2.5px solid black;
-  font-size: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-.input:focus {
-  outline: none;
-  border-color: #06f;
-}
-.search-button {
-  position: relative;
-
-  height: 39.5px;
-  font-size: 1em;
-  margin-left: 50px;
   align-items: center;
-  background-color: #fff;
-  border: 2px solid #000;
-  box-sizing: border-box;
-  color: #000;
-  cursor: pointer;
-  display: inline-flex;
-  fill: #000;
-  font-weight: 600;
-  justify-content: center;
-  letter-spacing: -0.8px;
-  line-height: 24px;
-  min-width: 140px;
-  outline: 0;
-  text-align: center;
-  text-decoration: none;
-  transition: all 0.3s;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
+  background: rgba(3, 12, 18, 0.1);
+  backdrop-filter: blur(12px) saturate(120%);
+  -webkit-backdrop-filter: blur(12px) saturate(120%);
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  width: 360px;
+  margin-left: 35px;
 }
 
-.search-button:focus {
-  color: #171e29;
-}
-
-.search-button:hover {
-  border-color: azure;
-  color: rgb(11, 11, 11);
-  fill: #06f;
-}
-
-.search-button:active {
-  border-color: azure;
+.input {
+  background: rgba(25, 40, 50, 0);
+  flex: 1;
+  font-family: var(--font-poppins), sans-serif;
+  font-weight: 500;
   color: azure;
-  fill: azure;
+  border: none;
+  outline: none;
+  font-size: 14px;
 }
 
-@media (min-width: 768px) {
-  .search-button {
-    min-width: 170px;
-  }
+.search-button {
+  color: azure;
+  font-family: var(--font-poppins), sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.search-icon {
+  color: azure;
+  display: flex;
+  align-items: center;
 }

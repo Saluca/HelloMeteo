@@ -15,3 +15,5 @@ export interface DailyForecast {
   weathercode: number;
   precipitationProb: number;
 }
+
+declare module "luxon";

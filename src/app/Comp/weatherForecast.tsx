@@ -44,6 +44,11 @@ const Weather = () => {
           type="text"
           value={searchLocation}
           onChange={(e) => setSearchLocation(e.target.value.toUpperCase())}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleSearch();
+            }
+          }}
           // placeholder="Enter a City"
         />
         <button onClick={handleSearch} className="search-button">

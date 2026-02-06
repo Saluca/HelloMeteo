@@ -42,8 +42,10 @@
   transform: translateY(-2px);
 }
 .hourlyWrapper {
+  width: 100vw;
   margin-top: -280px;
 }
+
 .hourlyTitle {
   font-family: var(--font-poppins), sans-serif;
   display: block;
@@ -115,7 +117,7 @@
   padding: 1rem;
   display: flex;
   color: azure;
-  gap: 0.5rem;
+  gap: 0.3rem;
 }
 .dailyItem {
   display: flex;
@@ -136,7 +138,7 @@
   background: rgba(255, 255, 255, 0.1);
   min-width: 40px;
   border-radius: 8px;
-  padding: 0.5rem 0.5rem;
+  padding: 0.6rem 0.6rem;
   display: flex;
   align-items: center;
   opacity: 0.85;
